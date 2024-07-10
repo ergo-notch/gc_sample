@@ -7,6 +7,7 @@ class HomeState {
   final String? errorMessage;
   final int limit;
   final List<PokemonEntity> searchResults;
+  final List<String> favoritesIds;
   final String? searchText;
 
   const HomeState({
@@ -16,6 +17,7 @@ class HomeState {
     this.limit = 20,
     this.searchResults = const [],
     this.searchText,
+    this.favoritesIds = const [],
   });
 
   HomeState copyWith(
@@ -24,7 +26,8 @@ class HomeState {
       String? errorMessage,
       int? limit,
       List<PokemonEntity>? searchResults,
-      String? searchText}) {
+      String? searchText,
+      List<String>? favoritesIds}) {
     return HomeState(
       pokemons: pokemons ?? this.pokemons,
       status: status ?? this.status,
@@ -32,6 +35,7 @@ class HomeState {
       limit: limit ?? this.limit,
       searchResults: searchResults ?? this.searchResults,
       searchText: searchText ?? this.searchText,
+      favoritesIds: favoritesIds ?? this.favoritesIds,
     );
   }
 }

@@ -3,25 +3,22 @@ import 'package:sample/core/error/failures.dart';
 import 'package:sample/core/usecase.dart';
 import 'package:sample/features/home/domain/entities/pokemon_entity.dart';
 
-class AddFavoriteUseCase
-    extends UseCase<List<PokemonEntity>?, FavoriteUseCaseParams> {
+class AddFavoriteUseCase extends UseCase<List<String>?, FavoriteUseCaseParams> {
   @override
-  Future<Either<Failure, List<PokemonEntity>?>> call(
+  Future<Either<Failure, List<String>?>> call(
       FavoriteUseCaseParams params) async {
-    List<PokemonEntity> result = List.of(params.pokemons ?? []);
-    final index =
-        result.indexWhere((element) => element.id == params.pokemon?.id);
-    if (index != -1) {
-      result[index] =
-          params.pokemon?.copyWith(isFavorite: true) ?? PokemonEntity();
-    }
-    return Right(result);
+    List<String> favorites = List.of(params.favoritesIds ?? []);
+    favorites.add(params.pokemon?.id ?? '');
+    return Right(favorites);
   }
 }
 
 class FavoriteUseCaseParams {
   final PokemonEntity? pokemon;
-  final List<PokemonEntity>? pokemons;
+  final List<String>? favoritesIds;
 
-  FavoriteUseCaseParams({required this.pokemon, required this.pokemons});
+  FavoriteUseCaseParams({
+    required this.favoritesIds,
+    required this.pokemon,
+  });
 }

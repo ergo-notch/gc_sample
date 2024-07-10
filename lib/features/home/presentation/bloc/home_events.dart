@@ -19,25 +19,6 @@ class GetPokemonsEvent extends HomeEvent {
   List<Object> get props => [limit ?? 0, offset ?? 0];
 }
 
-class GetPokemonsNextPageEvent extends HomeEvent {
-  final int? limit;
-  final int? offset;
-
-  const GetPokemonsNextPageEvent({this.limit, this.offset});
-
-  @override
-  List<Object> get props => [limit ?? 0, offset ?? 0];
-}
-
-class GetPokemonsBySearchEvent extends HomeEvent {
-  final String? search;
-
-  const GetPokemonsBySearchEvent({this.search});
-
-  @override
-  List<Object> get props => [search ?? ''];
-}
-
 class FetchedPokemonsEvent extends HomeEvent {
   final List<PokemonEntity> pokemons;
 
@@ -134,4 +115,13 @@ class FoundedPokemonsEvent extends HomeEvent {
 
   @override
   List<Object> get props => [pokemons];
+}
+
+class MatchFavoritePokemonsEvent extends HomeEvent {
+  final List<String> favoritesIds;
+
+  const MatchFavoritePokemonsEvent({required this.favoritesIds});
+
+  @override
+  List<Object> get props => [favoritesIds];
 }
